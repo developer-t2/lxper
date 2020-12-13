@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { memo } from 'react';
+import Login from '../components/Login';
 
 const RootRouter = () => {
-  return <div>Hello, React!!</div>;
+  return <Login />;
 };
 
-export default RootRouter;
+export default memo(RootRouter);

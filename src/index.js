@@ -4,6 +4,9 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 
 import theme from './config/theme';
 import App from './App';
+import userCheck from './components/UserCheck';
+
+userCheck();
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
