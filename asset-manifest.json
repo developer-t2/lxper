@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/lxper/static/js/main.c776f3d6.chunk.js",
+    "main.js.map": "/lxper/static/js/main.c776f3d6.chunk.js.map",
+    "runtime-main.js": "/lxper/static/js/runtime-main.1cb6b563.js",
+    "runtime-main.js.map": "/lxper/static/js/runtime-main.1cb6b563.js.map",
+    "static/js/2.3aff0986.chunk.js": "/lxper/static/js/2.3aff0986.chunk.js",
+    "static/js/2.3aff0986.chunk.js.map": "/lxper/static/js/2.3aff0986.chunk.js.map",
+    "index.html": "/lxper/index.html",
+    "static/js/2.3aff0986.chunk.js.LICENSE.txt": "/lxper/static/js/2.3aff0986.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1cb6b563.js",
+    "static/js/2.3aff0986.chunk.js",
+    "static/js/main.c776f3d6.chunk.js"
+  ]
+}
