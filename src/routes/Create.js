@@ -133,7 +133,7 @@ const Create = () => {
     setContent('');
     setSolution('');
     setSolutions([]);
-    setChecked(-1);
+    setChecked(0);
   }, []);
 
   const onSubmit = useCallback(() => {

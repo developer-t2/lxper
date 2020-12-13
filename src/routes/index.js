@@ -9,7 +9,7 @@ import Profile from '../components/Profile';
 
 import Questions from '../routes/Questions';
 import Create from '../routes/Create';
-import Replace from '../routes/Replace';
+import Replace from './Update';
 
 const RootRouter = () => {
   return (

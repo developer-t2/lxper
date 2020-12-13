@@ -8,6 +8,9 @@ const {
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_SUCCESS,
   CREATE_QUESTION_FAILURE,
+  UPDATE_QUESTION_REQUEST,
+  UPDATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_FAILURE,
 } = require('../types');
 
 const initialState = {
@@ -49,6 +52,24 @@ const question = (state = initialState, action) => {
         questions: action.data,
       };
     case READ_QUESTIONS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+
+    case UPDATE_QUESTION_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case UPDATE_QUESTION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case UPDATE_QUESTION_FAILURE:
       return {
         ...state,
         isLoading: false,

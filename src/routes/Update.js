@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+
 import { history } from '../redux/store';
 
 import { Button, IconButton, makeStyles, Paper, TextField, Typography } from '@material-ui/core';
 import { AddBox, Delete } from '@material-ui/icons';
-import { CREATE_QUESTION_REQUEST } from '../redux/types';
+import { UPDATE_QUESTION_REQUEST } from '../redux/types';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -144,14 +144,14 @@ const Create = ({ match }) => {
     setContent('');
     setSolution('');
     setSolutions([]);
-    setChecked(-1);
+    setChecked(0);
   }, []);
 
   const onSubmit = useCallback(() => {
     dispatch({
-      type: CREATE_QUESTION_REQUEST,
+      type: UPDATE_QUESTION_REQUEST,
       data: {
-        id: uuidv4(),
+        id: match.params.id,
         number: parseInt(number),
         direction: title,
         content,
@@ -161,7 +161,7 @@ const Create = ({ match }) => {
     });
 
     history.push('/');
-  }, [dispatch, number, title, content, solutions, checked]);
+  }, [dispatch, match.params.id, number, title, content, solutions, checked]);
 
   return (
     <Paper className={classes.paper}>
