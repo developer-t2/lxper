@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, makeStyles } from '@material-ui/core';
 
 import { READ_QUESTIONS_REQUEST } from '../redux/types';
-import Question from './Question';
+import Question from '../components/Question';
 
 const useStyles = makeStyles((theme) => {
   return {

@@ -1,15 +1,13 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
-import { AppBar, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
+import { AppBar, Button, makeStyles, Toolbar, Tooltip, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => {
   return {
-    menu: {
-      marginRight: theme.spacing(2),
-    },
     title: {
       flex: 1,
+      textDecoration: 'none',
     },
     toolbar: theme.mixins.toolbar,
   };
@@ -18,17 +16,27 @@ const useStyles = makeStyles((theme) => {
 const Header = () => {
   const classes = useStyles();
 
+  const onCreate = useCallback(() => {}, []);
+
   return (
     <>
       <AppBar>
         <Toolbar>
-          <IconButton className={classes.menu} edge="start" color="inherit">
-            <Menu />
-          </IconButton>
-
-          <Typography className={classes.title} variant="h6">
+          <Typography
+            className={classes.title}
+            variant="h6"
+            color="inherit"
+            component={Link}
+            to="/"
+          >
             LXPER
           </Typography>
+
+          <Tooltip title="CREATE" arrow>
+            <Button component={Link} to="/create" color="inherit" onClick={onCreate}>
+              문제 생성
+            </Button>
+          </Tooltip>
         </Toolbar>
       </AppBar>
 

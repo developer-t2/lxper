@@ -7,10 +7,12 @@ import {
   CardHeader,
   IconButton,
   makeStyles,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Delete, Edit, Star } from '@material-ui/icons';
+import { Delete, Edit } from '@material-ui/icons';
 import { DELETE_QUESTION_REQUEST } from '../redux/types';
+import { history } from '../redux/store';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -26,9 +28,6 @@ const useStyles = makeStyles((theme) => {
     subtitle: {
       marginBottom: theme.spacing(1),
     },
-    choice: {
-      marginLeft: '20px',
-    },
   };
 });
 
@@ -37,6 +36,13 @@ const Question = ({ data }) => {
   const { id, number, direction, content, choices, answer } = data;
 
   const classes = useStyles();
+
+  const onReplace = useCallback(
+    (id) => () => {
+      history.push(`/replace/${id}`);
+    },
+    []
+  );
 
   const onDelete = useCallback(
     (id) => () => {
@@ -56,12 +62,16 @@ const Question = ({ data }) => {
         subheader={<Typography variant="h6">{direction}</Typography>}
         action={
           <>
-            <IconButton>
-              <Edit />
-            </IconButton>
-            <IconButton onClick={onDelete(id)}>
-              <Delete />
-            </IconButton>
+            <Tooltip title="수정하기" arrow>
+              <IconButton onClick={onReplace(id)}>
+                <Edit />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="삭제하기" arrow>
+              <IconButton onClick={onDelete(id)}>
+                <Delete />
+              </IconButton>
+            </Tooltip>
           </>
         }
       />
@@ -75,14 +85,13 @@ const Question = ({ data }) => {
           if (answer === index) {
             return (
               <Typography key={index} variant="subtitle2">
-                <Star fontSize="small" color="secondary" />
-                {index + 1}. {choice}
+                {index + 1}. {choice} (정답입니다.)
               </Typography>
             );
           }
 
           return (
-            <Typography key={index} className={classes.choice} variant="subtitle2">
+            <Typography key={index} variant="subtitle2">
               {index + 1}. {choice}
             </Typography>
           );

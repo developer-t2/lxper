@@ -2,6 +2,9 @@ import axios from 'axios';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import {
+  CREATE_QUESTION_FAILURE,
+  CREATE_QUESTION_REQUEST,
+  CREATE_QUESTION_SUCCESS,
   DELETE_QUESTION_FAILURE,
   DELETE_QUESTION_REQUEST,
   DELETE_QUESTION_SUCCESS,
@@ -9,6 +12,45 @@ import {
   READ_QUESTIONS_REQUEST,
   READ_QUESTIONS_SUCCESS,
 } from '../types';
+
+// create question
+const createQuestionAPI = async (data) => {
+  console.log(data);
+
+  const config = {
+    headers: {
+      Auth: localStorage.getItem('token'),
+    },
+  };
+
+  return await axios.post('api/questions', data, config);
+};
+
+function* createQuestion(action) {
+  try {
+    const result = yield call(createQuestionAPI, action.data);
+
+    yield put({
+      type: CREATE_QUESTION_SUCCESS,
+      data: result.data,
+    });
+
+    yield put({
+      type: READ_QUESTIONS_REQUEST,
+    });
+  } catch (err) {
+    console.error(err);
+
+    yield put({
+      type: CREATE_QUESTION_FAILURE,
+      error: true,
+    });
+  }
+}
+
+function* watchCreateQuestion() {
+  yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion);
+}
 
 // read question
 const readQuestionsAPI = async () => {
@@ -82,5 +124,5 @@ function* watchDeleteQuestion() {
 }
 
 export default function* question() {
-  yield all([fork(watchReadQuestions), fork(watchDeleteQuestion)]);
+  yield all([fork(watchCreateQuestion), fork(watchReadQuestions), fork(watchDeleteQuestion)]);
 }

@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { Grid } from '@material-ui/core';
 
@@ -7,7 +7,9 @@ import Login from '../components/Login';
 import Header from '../components/Header';
 import Profile from '../components/Profile';
 
-import Questions from '../components/Questions';
+import Questions from '../routes/Questions';
+import Create from '../routes/Create';
+import Replace from '../routes/Replace';
 
 const RootRouter = () => {
   return (
@@ -22,6 +24,10 @@ const RootRouter = () => {
         <Grid item xs={12} sm={7} md={8} lg={9}>
           <Switch>
             <Route path="/" exact component={Questions} />
+            <Route path="/create" exact component={Create} />
+            <Route path="/replace/:id" exact component={Replace} />
+
+            <Redirect from="*" to="/" />
           </Switch>
         </Grid>
       </Grid>
