@@ -4,7 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { history } from '../redux/store';
 
-import { Button, IconButton, makeStyles, Paper, TextField, Typography } from '@material-ui/core';
+import {
+  Button,
+  Container,
+  IconButton,
+  makeStyles,
+  Paper,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import { AddBox, Delete } from '@material-ui/icons';
 import { UPDATE_QUESTION_REQUEST } from '../redux/types';
 
@@ -164,107 +172,109 @@ const Create = ({ match }) => {
   }, [dispatch, match.params.id, number, title, content, solutions, checked]);
 
   return (
-    <Paper className={classes.paper}>
-      <div className={classes.line}>
-        <TextField
-          className={classes.number}
-          label="문제 번호"
-          type="number"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={number}
-          onChange={onChangeNumber}
-        />
-        <TextField
-          className={classes.title}
-          label="문제 제목"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={title}
-          onChange={onChangeTitle}
-        />
-      </div>
-
-      <TextField
-        className={classes.multiText}
-        label="문제 내용"
-        fullWidth
-        multiline
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={content}
-        onChange={onChangeContent}
-      />
-
-      <Paper className={classes.paper} variant="outlined">
-        <Typography
-          className={classes.typo}
-          gutterBottom
-          value={solution}
-          onChange={onChangeSolution}
-        >
-          답안지
-        </Typography>
-
+    <Container maxWidth="md">
+      <Paper className={classes.paper}>
         <div className={classes.line}>
           <TextField
-            className={classes.solution}
-            variant="outlined"
-            size="small"
-            onChange={onChange}
-            value={solution}
+            className={classes.number}
+            label="문제 번호"
+            type="number"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={number}
+            onChange={onChangeNumber}
           />
-
-          <IconButton className={classes.iconButton} onClick={onClick}>
-            <AddBox />
-          </IconButton>
+          <TextField
+            className={classes.title}
+            label="문제 제목"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={title}
+            onChange={onChangeTitle}
+          />
         </div>
 
-        {solutions.map((solution, index) => (
-          <Paper
-            key={`${solution}-${index}`}
-            className={checked === index ? classes.checked : classes.paperBox}
-            variant="outlined"
-            onClick={onCheck(index)}
+        <TextField
+          className={classes.multiText}
+          label="문제 내용"
+          fullWidth
+          multiline
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={content}
+          onChange={onChangeContent}
+        />
+
+        <Paper className={classes.paper} variant="outlined">
+          <Typography
+            className={classes.typo}
+            gutterBottom
+            value={solution}
+            onChange={onChangeSolution}
           >
-            <div className={classes.paperLine}>
-              <Typography className={classes.paperText}>
-                {index + 1}. {solution}
-              </Typography>
+            답안지
+          </Typography>
 
-              <IconButton className={classes.iconButton} onClick={onDelete(index)}>
-                <Delete />
-              </IconButton>
-            </div>
-          </Paper>
-        ))}
+          <div className={classes.line}>
+            <TextField
+              className={classes.solution}
+              variant="outlined"
+              size="small"
+              onChange={onChange}
+              value={solution}
+            />
 
-        <Typography className={classes.paperTypo} color="secondary">
-          등록하신 답안 중에서 반드시 하나를 선택해야 합니다(답안을 클릭해주세요).
-        </Typography>
+            <IconButton className={classes.iconButton} onClick={onClick}>
+              <AddBox />
+            </IconButton>
+          </div>
+
+          {solutions.map((solution, index) => (
+            <Paper
+              key={`${solution}-${index}`}
+              className={checked === index ? classes.checked : classes.paperBox}
+              variant="outlined"
+              onClick={onCheck(index)}
+            >
+              <div className={classes.paperLine}>
+                <Typography className={classes.paperText}>
+                  {index + 1}. {solution}
+                </Typography>
+
+                <IconButton className={classes.iconButton} onClick={onDelete(index)}>
+                  <Delete />
+                </IconButton>
+              </div>
+            </Paper>
+          ))}
+
+          <Typography className={classes.paperTypo} color="secondary">
+            등록하신 답안 중에서 반드시 하나를 선택해야 합니다(답안을 클릭해주세요).
+          </Typography>
+        </Paper>
+
+        <div className={classes.buttons}>
+          <Button className={classes.button} variant="contained" color="primary" onClick={onReset}>
+            RESET
+          </Button>
+          <Button className={classes.button} variant="contained" color="primary" onClick={onSubmit}>
+            UPDATE
+          </Button>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            component={Link}
+            to="/"
+          >
+            CANCEL
+          </Button>
+        </div>
       </Paper>
-
-      <div className={classes.buttons}>
-        <Button className={classes.button} variant="contained" color="primary" onClick={onReset}>
-          RESET
-        </Button>
-        <Button className={classes.button} variant="contained" color="primary" onClick={onSubmit}>
-          SUBMIT
-        </Button>
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          component={Link}
-          to="/"
-        >
-          CANCEL
-        </Button>
-      </div>
-    </Paper>
+    </Container>
   );
 };
 

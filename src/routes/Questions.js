@@ -9,7 +9,7 @@ import Question from '../components/Question';
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      margin: theme.spacing(2, 0),
+      marginTop: theme.spacing(2),
     },
   };
 });
