@@ -86,9 +86,9 @@ const Header = () => {
           type: SEARCH_QUESTION_REQUEST,
           data: e.target.value,
         });
-      }
 
-      history.push(`/search/${e.target.value}`);
+        history.push(`/search/${e.target.value}`);
+      }
     },
     [dispatch]
   );
