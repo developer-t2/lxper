@@ -137,6 +137,22 @@ const Create = () => {
   }, []);
 
   const onSubmit = useCallback(() => {
+    if (!parseInt(number)) {
+      return alert('문제 번호를 입력하세요.');
+    }
+
+    if (!title) {
+      return alert('문제 제목을 입력하세요.');
+    }
+
+    if (!content) {
+      return alert('문제 내용을 입력하세요.');
+    }
+
+    if (solutions.length === 0) {
+      return alert('답안 내용을 입력하세요.');
+    }
+
     dispatch({
       type: CREATE_QUESTION_REQUEST,
       data: {

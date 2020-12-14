@@ -8,6 +8,7 @@ import {
   LOGOUT_FAILURE,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
+  READ_QUESTIONS_REQUEST,
   USER_CHECK_FAILURE,
   USER_CHECK_REQUEST,
   USER_CHECK_SUCCESS,
@@ -72,6 +73,10 @@ function* login(action) {
     yield put({
       type: LOGIN_SUCCESS,
       data: result.data,
+    });
+
+    yield put({
+      type: READ_QUESTIONS_REQUEST,
     });
   } catch (err) {
     console.error(err);
