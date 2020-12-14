@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+## 프로젝트 실행 방법
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. 배포 링크: [https://developer-t2.github.io/lxper/](https://developer-t2.github.io/lxper/).
+2. 소스 코드 다운로드 및 모듈 설치(npm install)한 다음, 실행(npm start)
 
-## Available Scripts
+## 소스 폴더 구조(src 하위 폴더)
 
-In the project directory, you can run:
+1. components
 
-### `npm start`
+   - 프로젝트에 필요한 컴포넌트 관리(레이아웃, 기능 등)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. config
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   - 프로젝트 설정 관리(Material-UI 색상 등)
 
-### `npm test`
+3. redux
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   - Redux, Redux-Saga와 관련된 파일 모음
+   - reducers: 스토어의 상태 변경과 관련된 파일 모음
+   - sagas: 액션에 대한 비동기 작업 관련 파일 모음
 
-### `npm run build`
+4. routes
+   - 화면 전환과 관련된 파일 모음
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 사용한 패키지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. @material-ui/core, @material-ui/icons
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   - 머티리얼 디자인 사용
 
-### `npm run eject`
+2. axios
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   - 서버와 통신
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. connected-react-router
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   - 리덕스를 사용하여 라우터 관리
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. dotenv
 
-## Learn More
+   - 데이터 보안 관련
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. redux, react-redux, redux-saga
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   - 리덕스 사용 및 리액트에서 리덕스 사용
 
-### Code Splitting
+6. react-router-dom
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   - 리액트에서 라우터 사용
 
-### Analyzing the Bundle Size
+7. uuid
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   - 문제 생성에 대한 ID 생성
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+8. 기타
+   - CRA로 기본적으로 설치된 모듈들
+   - Material-UI 등 설치 이후에 사용하지 않지만 경고로 인해 설치된 모듈들
