@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { Grid } from '@material-ui/core';
+import { CircularProgress, Dialog, DialogContent, Grid, makeStyles } from '@material-ui/core';
 
 import Login from '../components/Login';
 import Header from '../components/Header';
@@ -12,7 +13,26 @@ import Create from './Create';
 import Update from './Update';
 import Search from './Search';
 
+const useStyles = makeStyles((theme) => {
+  return {
+    dialog: {
+      '& > div > div': {
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        boxShadow: 'none',
+      },
+    },
+    content: {
+      paddingBottom: theme.spacing(2),
+    },
+  };
+});
+
 const RootRouter = () => {
+  const { isLoading: isAuthLoading } = useSelector((state) => state.auth);
+  const { isLoading: isQuestionLoading } = useSelector((state) => state.question);
+
+  const classes = useStyles();
+
   return (
     <>
       <Login />
@@ -33,6 +53,12 @@ const RootRouter = () => {
           </Switch>
         </Grid>
       </Grid>
+
+      <Dialog className={classes.dialog} open={isAuthLoading || isQuestionLoading}>
+        <DialogContent className={classes.content}>
+          <CircularProgress color="primary" />
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
