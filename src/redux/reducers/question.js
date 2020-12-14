@@ -11,6 +11,9 @@ const {
   UPDATE_QUESTION_REQUEST,
   UPDATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_FAILURE,
+  SEARCH_QUESTION_REQUEST,
+  SEARCH_QUESTION_SUCCESS,
+  SEARCH_QUESTION_FAILURE,
 } = require('../types');
 
 const initialState = {
@@ -88,6 +91,25 @@ const question = (state = initialState, action) => {
         isLoading: false,
       };
     case DELETE_QUESTION_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+
+    case SEARCH_QUESTION_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case SEARCH_QUESTION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        question: action.data,
+      };
+    case SEARCH_QUESTION_FAILURE:
       return {
         ...state,
         isLoading: false,

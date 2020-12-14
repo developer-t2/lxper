@@ -11,20 +11,23 @@ import {
   READ_QUESTIONS_FAILURE,
   READ_QUESTIONS_REQUEST,
   READ_QUESTIONS_SUCCESS,
+  SEARCH_QUESTION_FAILURE,
+  SEARCH_QUESTION_REQUEST,
+  SEARCH_QUESTION_SUCCESS,
   UPDATE_QUESTION_FAILURE,
   UPDATE_QUESTION_REQUEST,
   UPDATE_QUESTION_SUCCESS,
 } from '../types';
 
 // create question
-const createQuestionAPI = async (data) => {
+const createQuestionAPI = (data) => {
   const config = {
     headers: {
       Auth: localStorage.getItem('token'),
     },
   };
 
-  return await axios.post('api/questions', data, config);
+  return axios.post('api/questions', data, config);
 };
 
 function* createQuestion(action) {
@@ -54,14 +57,14 @@ function* watchCreateQuestion() {
 }
 
 // read question
-const readQuestionsAPI = async () => {
+const readQuestionsAPI = () => {
   const config = {
     headers: {
       Auth: localStorage.getItem('token'),
     },
   };
 
-  return await axios.get('api/questions', config);
+  return axios.get('api/questions', config);
 };
 
 function* readQuestions() {
@@ -87,16 +90,14 @@ function* watchReadQuestions() {
 }
 
 // update question
-const updateQuestionAPI = async (data) => {
+const updateQuestionAPI = (data) => {
   const config = {
     headers: {
       Auth: localStorage.getItem('token'),
     },
   };
 
-  console.log(data);
-
-  return await axios.post(`api/questions/${data.id}`, data, config);
+  return axios.post(`api/questions/${data.id}`, data, config);
 };
 
 function* updateQuestion(action) {
@@ -126,14 +127,14 @@ function* watchUpdateQuestion() {
 }
 
 // delete question
-const deleteQuestionAPI = async (id) => {
+const deleteQuestionAPI = (id) => {
   const config = {
     headers: {
       Auth: localStorage.getItem('token'),
     },
   };
 
-  return await axios.delete(`api/questions/${id}`, config);
+  return axios.delete(`api/questions/${id}`, config);
 };
 
 function* deleteQuestion(action) {
@@ -163,11 +164,45 @@ function* watchDeleteQuestion() {
   yield takeLatest(DELETE_QUESTION_REQUEST, deleteQuestion);
 }
 
+// search question
+const searchQuestionAPI = (id) => {
+  const config = {
+    headers: {
+      Auth: localStorage.getItem('token'),
+    },
+  };
+
+  return axios.get(`api/questions/${id}`, config);
+};
+
+function* searchQuestion(action) {
+  try {
+    const result = yield call(searchQuestionAPI, action.data);
+
+    yield put({
+      type: SEARCH_QUESTION_SUCCESS,
+      data: result.data,
+    });
+  } catch (err) {
+    console.error(err);
+
+    yield put({
+      type: SEARCH_QUESTION_FAILURE,
+      error: true,
+    });
+  }
+}
+
+function* watchSearchQuestion() {
+  yield takeLatest(SEARCH_QUESTION_REQUEST, searchQuestion);
+}
+
 export default function* question() {
   yield all([
     fork(watchCreateQuestion),
     fork(watchReadQuestions),
     fork(watchUpdateQuestion),
     fork(watchDeleteQuestion),
+    fork(watchSearchQuestion),
   ]);
 }

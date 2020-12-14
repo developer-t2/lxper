@@ -50,6 +50,8 @@ const Question = ({ data }) => {
         type: DELETE_QUESTION_REQUEST,
         data: id,
       });
+
+      history.push(`/`);
     },
     [dispatch]
   );

@@ -7,9 +7,10 @@ import Login from '../components/Login';
 import Header from '../components/Header';
 import Profile from '../components/Profile';
 
-import Questions from '../routes/Questions';
-import Create from '../routes/Create';
-import Replace from './Update';
+import Questions from './Questions';
+import Create from './Create';
+import Update from './Update';
+import Search from './Search';
 
 const RootRouter = () => {
   return (
@@ -25,7 +26,8 @@ const RootRouter = () => {
           <Switch>
             <Route path="/" exact component={Questions} />
             <Route path="/create" exact component={Create} />
-            <Route path="/replace/:id" exact component={Replace} />
+            <Route path="/update/:id" exact component={Update} />
+            <Route path="/search/:id" exact component={Search} />
 
             <Redirect from="*" to="/" />
           </Switch>

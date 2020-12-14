@@ -14,7 +14,7 @@ import {
 } from '../types';
 
 // user check
-const userCheckAPI = async (token) => {
+const userCheckAPI = (token) => {
   const config = {
     headers: {
       Auth: ``,
@@ -25,7 +25,7 @@ const userCheckAPI = async (token) => {
     config.headers.Auth = token;
   }
 
-  return await axios.get('auth', config);
+  return axios.get('auth', config);
 };
 
 function* userCheck(action) {
